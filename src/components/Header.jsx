@@ -1,12 +1,11 @@
-import { Code } from "lucide-react";
+import { Code, Github } from "lucide-react";
 import React from "react";
-import UserInfoCard from "./UserInfoCard";
 
 const Header = () => {
   return (
-    <div className="flex flex-row justify-between p-5 md:p-7">
-      <div className="flex flex-row text-2xl">
-        <div className="centered mr-2 md:block md:mt-1">
+    <div className="sticky top-0 z-10 flex flex-row justify-between bg-zinc-50 p-5 md:p-7 dark:bg-black">
+      <div className="flex flex-row">
+        <div className="centered mr-2 md:block">
           <Code strokeWidth={2} />
         </div>
         <div className="centered md:block">
@@ -16,16 +15,11 @@ const Header = () => {
         </div>
       </div>
 
-      <UserInfoCard
-        config={{
-          photoUrl: "",
-          name: "Soumyabrata Sarkar",
-          email: "sarkar.soumyabrata2@gmail.com",
-          username: "",
-          description: "",
-          githubUrl: "",
-        }}
-      />
+      <div className="flex flex-row text-2xl">
+        <div className="centered mr-2 md:block md:mt-1">
+          <Github strokeWidth={2} />
+        </div>
+      </div>
     </div>
   );
 };

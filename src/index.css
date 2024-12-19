@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@200&display=swap");
+
+.font-style-normal {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.font-style-bold {
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: bold;
+} */
+
 @layer components {
   .centered {
     @apply flex flex-col items-center justify-center;
@@ -13,5 +29,9 @@
 
   .horizontal-centered {
     @apply flex flex-row justify-center;
+  }
+
+  .card {
+    @apply rounded-md;
   }
 }

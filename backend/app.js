@@ -6,8 +6,8 @@ import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 dotenv.config();
-cors();
 
+app.use(cors());
 app.use(express.json());
 app.get("/v1/getGridData", appController);
 app.use(errorHandler);

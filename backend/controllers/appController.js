@@ -1,10 +1,12 @@
-import { getGridData } from "../services/appService.js";
+import { getUserData } from "../services/appService.js";
 
 const appController = async (req, res, next) => {
   try {
-    const gridData = await getGridData(req.query.username);
-    res.json(gridData);
+    const userData = await getUserData(req.query.username);
+    res.json(userData);
   } catch (error) {
+    console.log(error);
+
     next({
       status: error.status || 500,
       message:
