@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import PieChartViewer from "./components/PieChartViewer";
+import TileMapViewer from "./components/TileMapViewer";
 import HomePage from "./pages/HomePage";
 
 function App() {
@@ -10,7 +12,10 @@ function App() {
         <Header />
         <Routes>
           {/* <Route path="/username=?" element={<HomePage />} /> */}
-          <Route path="/tracker" element={<HomePage />} />
+          <Route path="tracker" element={<HomePage />}>
+            <Route path="slideMap" element={<TileMapViewer />} />
+            <Route path="pieChart" element={<PieChartViewer />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

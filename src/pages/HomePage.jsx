@@ -1,8 +1,17 @@
-import { Calendar, Github, Grid, Moon, PieChart, Sun } from "lucide-react";
+import {
+  Calendar,
+  Github,
+  LayoutGrid,
+  Moon,
+  PieChart,
+  Sun,
+} from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import CardInfo from "../components/CardInfo";
 import DataCard from "../components/DataCard";
 import useFetchUserDataHook from "../hooks/FetchUserDataHook";
+import { useTechDataState } from "../states/TechDataState";
 
 const SecondHtmlUserInfo = (props) => {
   const { name, email, githubUrl } = props.config;
@@ -23,36 +32,26 @@ const SecondHtmlUserInfo = (props) => {
   );
 };
 
-const CardInfo = (props) => {
-  const { icon, title, description, fontColor, backColor, tag } = props.config;
-
-  return (
-    <div
-      className={`flex flex-col justify-between ${
-        backColor !== undefined ? backColor : ""
-      } ${fontColor !== undefined ? fontColor : ""} ${
-        tag === "leftInfo" ? "rounded-l-md" : "rounded-r-md"
-      } p-3 h-full md:p-5`}
-    >
-      <div className="flex flex-row">
-        <div className="centered mr-2">{icon}</div>
-        <div className="font-medium centered">{title}</div>
-      </div>
-
-      <div className="flex flex-col items-end">{description}</div>
-    </div>
-  );
-};
-
 const HomePage = () => {
   const [searchParams] = useSearchParams();
-  const { data, status } = useFetchUserDataHook(searchParams.get("username"));
+  const username = searchParams.get("username");
+  const { data, status } = useFetchUserDataHook(username);
+  const { yearTechData, setYearTechData } = useTechDataState();
   const [selectedYear, setSelectedYear] = useState();
   const [currentTheme, setCurrentTheme] = useState("light");
+
+  const navigator = useNavigate();
 
   useEffect(() => {
     if (data !== undefined) {
       setSelectedYear(data?.techData[0]?.updatedAt);
+
+      const techData = data?.techData.filter(
+        (item) => item.updatedAt === selectedYear
+      );
+
+      setYearTechData(techData[0]?.techStackData);
+      console.log(yearTechData);
     }
   }, [data]);
 
@@ -66,6 +65,12 @@ const HomePage = () => {
 
   const handleYearChange = (selectedYear) => {
     setSelectedYear(selectedYear);
+
+    const techData = data?.techData.filter(
+      (item) => item.updatedAt === selectedYear
+    );
+
+    setYearTechData(techData[0]?.techStackData);
   };
 
   const toggleTheme = () => {
@@ -89,15 +94,16 @@ const HomePage = () => {
   return (
     data !== undefined &&
     data.techData.length > 0 && (
-      <div className="horizontal-centered h-[100vh] md:mt-7">
+      <div className="horizontal-centered h-[100vh] xl:mt-7">
         {/* For medium or more screen resolution */}
-        <div class="grid-cols-5 grid-rows-3 gap-4 w-[70%] h-[70vh] hidden md:grid">
+        <div class="grid-cols-5 grid-rows-3 gap-4 w-[70%] h-[70vh] hidden xl:grid">
           <div class="col-span-2">
             <DataCard
               config={{
                 firstHtml: (
                   <img
                     src={data?.photoUrl}
+                    alt="user-pic"
                     className="object-cover h-[100%] w-[100%] rounded-l-md"
                   />
                 ),
@@ -135,9 +141,15 @@ const HomePage = () => {
                   <CardInfo
                     config={{
                       title: (
-                        <span className="font-medium md:text-lg">
-                          Slide to select year
-                        </span>
+                        <div className="flex flex-col">
+                          <span className="font-medium">
+                            Slide to select year
+                          </span>
+                          <span className="font-extralight">
+                            Track cumulative usages of diffent technologies over
+                            the years
+                          </span>
+                        </div>
                       ),
                       description: (
                         <input
@@ -196,7 +208,7 @@ const HomePage = () => {
                 firstHtml: (
                   <CardInfo
                     config={{
-                      icon: <Grid strokeWidth={1} />,
+                      icon: <LayoutGrid strokeWidth={1} />,
                       title: "Tile Map",
                       tag: "leftInfo",
                     }}
@@ -210,6 +222,9 @@ const HomePage = () => {
                   />
                 ),
                 cardSize: "small",
+                onClickFn: () => {
+                  navigator("slideMap?username=" + username);
+                },
               }}
             />
           </div>
@@ -233,29 +248,35 @@ const HomePage = () => {
                   />
                 ),
                 cardSize: "small",
+                onClickFn: () => {
+                  navigator("pieChart?username=" + username);
+                },
               }}
             />
           </div>
-          <div class=" col-span-3 row-span-2">04</div>
+          <div class=" col-span-3 row-span-2">
+            <Outlet />
+          </div>
         </div>
 
         {/* For less screen resolution */}
-        <div class="grid grid-cols-2 grid-rows-6 gap-2 w-[90%] md:hidden">
+        <div class="grid grid-cols-2 grid-rows-6 gap-2 w-[90%] xl:hidden">
           <div class="col-span-2">
             <DataCard
               config={{
                 firstHtml: (
                   <img
-                    src="MyPic.jpg"
+                    src={data?.photoUrl}
+                    alt="user-pic"
                     className="object-cover h-[100%] w-[100%] rounded-l-md"
                   />
                 ),
                 secondHtml: (
                   <SecondHtmlUserInfo
                     config={{
-                      name: "Soumyabrata Sarkar",
-                      email: "soumyabrata@gmail.com",
-                      githubUrl: "https://github.com/soumyabrata-sarkar",
+                      name: data?.name,
+                      email: data?.email,
+                      githubUrl: data?.githubUrl,
                     }}
                   />
                 ),
@@ -283,9 +304,15 @@ const HomePage = () => {
                   <CardInfo
                     config={{
                       title: (
-                        <span className="font-medium md:text-lg">
-                          Slide to select year
-                        </span>
+                        <div className="flex flex-col">
+                          <span className="font-medium">
+                            Slide to select year
+                          </span>
+                          <span className="font-extralight">
+                            Track cumulative usages of diffent technologies over
+                            the years
+                          </span>
+                        </div>
                       ),
                       description: (
                         <input
@@ -306,15 +333,23 @@ const HomePage = () => {
               }}
             />
           </div>
-          <div class="col-span-2 row-span-3">01</div>
+          <div class="col-span-2 row-span-3">
+            <Outlet />
+          </div>
           <div class="">
             <DataCard
               config={{
                 firstHtml: (
                   <CardInfo
                     config={{
-                      icon: <Sun strokeWidth={1} />,
-                      title: "Dark Theme",
+                      icon:
+                        currentTheme === "light" ? (
+                          <Sun strokeWidth={1} />
+                        ) : (
+                          <Moon strokeWidth={1} />
+                        ),
+                      title:
+                        currentTheme === "light" ? "Light Theme" : "Dark Theme",
                       tag: "leftInfo",
                     }}
                   />
@@ -327,6 +362,7 @@ const HomePage = () => {
                   />
                 ),
                 cardSize: "small",
+                onClickFn: toggleTheme,
               }}
             />
           </div>
@@ -336,7 +372,7 @@ const HomePage = () => {
                 firstHtml: (
                   <CardInfo
                     config={{
-                      icon: <Grid strokeWidth={1} />,
+                      icon: <LayoutGrid strokeWidth={1} />,
                       title: "Tile Map",
                       tag: "leftInfo",
                     }}
@@ -350,6 +386,9 @@ const HomePage = () => {
                   />
                 ),
                 cardSize: "small",
+                onClickFn: () => {
+                  navigator("slideMap?username=" + username);
+                },
               }}
             />
           </div>
@@ -373,6 +412,9 @@ const HomePage = () => {
                   />
                 ),
                 cardSize: "small",
+                onClickFn: () => {
+                  navigator("pieChart?username=" + username);
+                },
               }}
             />
           </div>

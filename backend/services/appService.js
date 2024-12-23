@@ -43,9 +43,25 @@ const getUserData = async (username) => {
 
 const calculateCumulativeTechStack = (data) => {
   const cumulativeTechStack = {};
+  let techDataList = [];
+  let newData = [];
+  let k = 0;
 
-  data.forEach((yearData) => {
-    let techDataList = [];
+  let currentYear = data[0]?.updatedAt;
+  while (k < data.length) {
+    if (data[k]?.updatedAt === currentYear.toString()) {
+      newData.push(data[k]);
+      k++;
+    } else {
+      newData.push({
+        updatedAt: currentYear.toString(),
+        techStackData: [],
+      });
+    }
+    currentYear++;
+  }
+
+  newData.forEach((yearData) => {
     yearData.techStackData.forEach((skill) => {
       const skillName = skill.name;
       const skillUsage = skill.usage;
@@ -55,15 +71,23 @@ const calculateCumulativeTechStack = (data) => {
       } else {
         cumulativeTechStack[skillName] = skillUsage;
       }
+
+      techDataList = techDataList.filter((item) => item.name !== skillName);
+
       techDataList.push({
         name: skillName,
         usage: cumulativeTechStack[skillName],
       });
     });
-    yearData.techStackData = techDataList;
+    yearData.techStackData = [...techDataList];
   });
 
-  return data;
+  //sort by usage
+  newData.forEach((yearData) => {
+    yearData.techStackData.sort((a, b) => b.usage - a.usage);
+  });
+
+  return newData;
 };
 
 const mergeTechStackData = (data) => {
