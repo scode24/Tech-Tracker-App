@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# Tech Tracker App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
 
-In the project directory, you can run:
+### Features
 
-### `npm start`
+- Track technologies used in a given year.
+- Input the number of lines of code written for each technology.
+- Visual representation using **Google Charts** to display the data.
+- RESTful API for backend interactions.
+- Integrated with GitHub API to fetch data related to technologies used in the year.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**:
+  - **React.js** for building the user interface.
+  - **Google Charts** for visualizing the data.
+- **Backend**:
+  - **Express.js** for building the REST API.
+  - **Node.js** as the runtime environment.
+  - **GitHub API** integration to fetch data related to technologies used in the year.
+- **Docker**:
+  - Dockerized app for easy deployment.
 
-### `npm test`
+## Running the Application
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We can run this application by cloning the repository code and manually start node services or to quickly set up and run the application with Docker, you can use **Docker Compose** to start both the frontend and backend services together.
 
-### `npm run build`
+### 1. Manually Start the Application
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Before proceesing, ensure you have NodeJS installed
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Node JS**: Installation guide.
+  - [Link](https://nodejs.org/en)
 
-### `npm run eject`
+First, clone the repository (or download the codebase) to your local machine.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+git clone https://github.com/scode24/Tech-Tracker-App.git
+cd tech-tracker
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run backend service
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+cd backend
+node app.js
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run frontend service
 
-## Learn More
+```bash
+cd .. # back to main folder tech-tracker
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 2. Running with Docker Compose
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This guide will walk you through the steps to run your application using **Docker Compose**.
 
-### Code Splitting
+### Prerequisites
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Before running Docker Compose, ensure you have the following installed:
 
-### Analyzing the Bundle Size
+- **Docker**: To manage and run containers.
+  - [Download Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose**: To manage multi-container Docker applications.
+  - [Install Docker Compose](https://docs.docker.com/compose/install/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+You can check if Docker and Docker Compose are installed by running the following commands:
 
-### Making a Progressive Web App
+```bash
+docker --version
+docker-compose --version
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Docker Compose Configuration
 
-### Advanced Configuration
+This is the Docker Compose configuration for running a **frontend** and **backend** service.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+#### docker-compose.yml
 
-### Deployment
+```yaml
+version: "3.8"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+services:
+  backend:
+    image: soumyabrata024/tech-tracker-service:latest # Backend service image
+    container_name: tech-tracker-service
+    ports:
+      - "7001:7001" # Expose backend on port 7001
+    environment:
+      - NODE_ENV=production
 
-### `npm run build` fails to minify
+  frontend:
+    image: soumyabrata024/tech-tracker-ui:latest # Frontend service image
+    container_name: tech-tracker-ui
+    ports:
+      - "3000:3000" # Expose frontend on port 3000
+    depends_on:
+      - backend # Wait for the backend service to start before frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To start the containers in detached mode (in the background), run the following command:
+
+```bash
+docker-compose up -f docker-compose-file.yml -d
+```
+
+## Access Tech Tracker
+
+```
+http://localhost:3000
+```

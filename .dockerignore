@@ -1,0 +1,14 @@
+# Ignore the backend folder
+backend/
+
+# Ignore any .git files
+.git/
+
+# Ignore node_modules (optional, since it's handled by npm install)
+node_modules/
+
+# Ignore Dockerfile (if you don’t want to copy it into the image)
+Dockerfile
+
+# Ignore any other files/folders you don’t want to copy
+*.log
