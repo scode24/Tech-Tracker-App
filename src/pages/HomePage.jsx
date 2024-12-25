@@ -1,4 +1,5 @@
 import {
+  BarChart,
   Calendar,
   Github,
   LayoutGrid,
@@ -39,7 +40,6 @@ const HomePage = () => {
   const { yearTechData, setYearTechData } = useTechDataState();
   const [selectedYear, setSelectedYear] = useState();
   const [currentTheme, setCurrentTheme] = useState("light");
-
   const navigator = useNavigate();
 
   useEffect(() => {
@@ -51,16 +51,24 @@ const HomePage = () => {
       );
 
       setYearTechData(techData[0]?.techStackData);
-      console.log(yearTechData);
+      navigator("tileMap?username=" + username);
     }
   }, [data]);
 
   if (status === "Loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="horizontal-centered h-[100vh] text-2xl">
+        Loading data...
+      </div>
+    );
   }
 
   if (status === "Error") {
-    return <div>OOPs! Something went wrong</div>;
+    return (
+      <div className="horizontal-centered h-[100vh] text-2xl">
+        OOPs! Something went wrong
+      </div>
+    );
   }
 
   const handleYearChange = (selectedYear) => {
@@ -223,12 +231,41 @@ const HomePage = () => {
                 ),
                 cardSize: "small",
                 onClickFn: () => {
-                  navigator("slideMap?username=" + username);
+                  navigator("tileMap?username=" + username);
                 },
               }}
             />
           </div>
           <div class="">
+            <DataCard
+              config={{
+                firstHtml: (
+                  <CardInfo
+                    config={{
+                      icon: <BarChart strokeWidth={1} />,
+                      title: "Bar Chart",
+                      tag: "leftInfo",
+                    }}
+                  />
+                ),
+                secondHtml: (
+                  <CardInfo
+                    config={{
+                      description: <span>Click here</span>,
+                    }}
+                  />
+                ),
+                cardSize: "small",
+                onClickFn: () => {
+                  navigator("barChart?username=" + username);
+                },
+              }}
+            />
+          </div>
+          <div class=" col-span-3 row-span-2">
+            <Outlet />
+          </div>
+          <div class="col-start-2">
             <DataCard
               config={{
                 firstHtml: (
@@ -253,9 +290,6 @@ const HomePage = () => {
                 },
               }}
             />
-          </div>
-          <div class=" col-span-3 row-span-2">
-            <Outlet />
           </div>
         </div>
 
@@ -387,11 +421,38 @@ const HomePage = () => {
                 ),
                 cardSize: "small",
                 onClickFn: () => {
-                  navigator("slideMap?username=" + username);
+                  navigator("tileMap?username=" + username);
                 },
               }}
             />
           </div>
+          <div class="">
+            <DataCard
+              config={{
+                firstHtml: (
+                  <CardInfo
+                    config={{
+                      icon: <BarChart strokeWidth={1} />,
+                      title: "Bar Chart",
+                      tag: "leftInfo",
+                    }}
+                  />
+                ),
+                secondHtml: (
+                  <CardInfo
+                    config={{
+                      description: <span>Click here</span>,
+                    }}
+                  />
+                ),
+                cardSize: "small",
+                onClickFn: () => {
+                  navigator("barChart?username=" + username);
+                },
+              }}
+            />
+          </div>
+
           <div class="">
             <DataCard
               config={{

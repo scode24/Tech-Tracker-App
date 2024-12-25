@@ -1,21 +1,21 @@
-import { PieChart } from "lucide-react";
+import { BarChart } from "lucide-react";
 import React from "react";
 import { useTechDataState } from "../states/TechDataState";
 import ChartViewer from "./ChartViewer";
 import GraphPlotter from "./GraphPlotter";
 
-const PieChartViewer = () => {
+const BarChartViewer = () => {
   const { yearTechData } = useTechDataState();
 
   return (
     <ChartViewer
       config={{
-        icon: <PieChart strokeWidth={1} />,
-        title: "Pie Chart Viewer",
-        content: <GraphPlotter type="PieChart" data={yearTechData} />,
+        icon: <BarChart strokeWidth={1} />,
+        title: "Bar Chart Viewer",
+        content: <GraphPlotter type="ColumnChart" data={yearTechData} />,
       }}
     />
   );
 };
 
-export default PieChartViewer;
+export default BarChartViewer;

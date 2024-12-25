@@ -5,8 +5,6 @@ const appController = async (req, res, next) => {
     const userData = await getUserData(req.query.username);
     res.json(userData);
   } catch (error) {
-    console.log(error);
-
     next({
       status: error.status || 500,
       message:

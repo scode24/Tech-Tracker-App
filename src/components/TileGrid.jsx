@@ -10,7 +10,7 @@ const TileGrid = (props) => {
         {list.map((item, index) => {
           return (
             <Tile
-              id={index}
+              key={index}
               config={{
                 name: item.name,
                 usage: item.usage,
