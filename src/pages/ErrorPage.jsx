@@ -21,7 +21,7 @@ const ErrorPage = () => {
         >
           <span className="mr-1">Are you looking for</span>
           <span className="font-bold text-orange-500 cursor-pointer">
-            Tech Tracker
+            {process.env.REACT_APP_TITLE}
           </span>
         </div>
       </motion.div>

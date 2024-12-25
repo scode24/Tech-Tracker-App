@@ -24,7 +24,7 @@ const Header = () => {
       <div className="flex flex-row text-2xl">
         <div
           className="centered mr-2 md:block md:mt-1 cursor-pointer"
-          onClick={() => window.open("https://github.com/scode24")}
+          onClick={() => window.open(process.env.REACT_APP_GITHUB_PROJECT_URL)}
         >
           <Github strokeWidth={2} />
         </div>
