@@ -154,8 +154,8 @@ const HomePage = () => {
                             Slide to select year
                           </span>
                           <span className="font-extralight">
-                            Track cumulative usages of diffent technologies over
-                            the years
+                            Track cumulative usages of different technologies
+                            over the years
                           </span>
                         </div>
                       ),
@@ -343,8 +343,8 @@ const HomePage = () => {
                             Slide to select year
                           </span>
                           <span className="font-extralight">
-                            Track cumulative usages of diffent technologies over
-                            the years
+                            Track cumulative usages of different technologies
+                            over the years
                           </span>
                         </div>
                       ),

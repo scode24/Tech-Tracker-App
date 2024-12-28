@@ -9,7 +9,7 @@ const CardInfo = (props) => {
         backColor !== undefined ? backColor : ""
       } ${fontColor !== undefined ? fontColor : ""} ${
         tag === "leftInfo" ? "rounded-l-md" : "rounded-r-md"
-      } p-3 h-full md:p-5`}
+      } p-3 h-full overflow-auto md:p-5`}
     >
       <div className="flex flex-row">
         <div className="centered mr-2">{icon}</div>

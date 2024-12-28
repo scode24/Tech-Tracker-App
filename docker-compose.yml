@@ -2,14 +2,14 @@ version: '3.8'
 
 services:
   backend:
-    image: soumyabrata024/tech-tracker-service:latest
-    container_name: tech-tracker-service
+    image: soumyabrata024/tech-tracker-app-backend:latest
+    container_name: tech-tracker-app-backend
     ports:
       - "7001:7001"
 
   frontend:
-    image: soumyabrata024/tech-tracker-ui:latest
-    container_name: tech-tracker-ui
+    image: soumyabrata024/tech-tracker-app:latest
+    container_name: tech-tracker-app
     ports:
       - "3000:3000"
     depends_on:

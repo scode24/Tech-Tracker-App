@@ -7,7 +7,7 @@
 The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
 
 - **Live Link** :
-  https://tech-track-app-frontend.azurewebsites.net/tracker
+  https://tech-tracker-app.azurewebsites.net/tracker
 
 ### Features
 
@@ -32,7 +32,7 @@ The **Tech Tracker App** allows users to track the technologies they have used t
 The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
 
 - **Live Link** :
-  https://tech-track-app-frontend.azurewebsites.net/tracker
+  https://tech-tracker-app.azurewebsites.net/tracker
 
 ### Features
 
@@ -130,20 +130,18 @@ version: "3.8"
 
 services:
   backend:
-    image: soumyabrata024/tech-tracker-service:latest # Backend service image
-    container_name: tech-tracker-service
+    image: soumyabrata024/tech-tracker-app-backend:latest
+    container_name: tech-tracker-app-backend
     ports:
-      - "7001:7001" # Expose backend on port 7001
-    environment:
-      - NODE_ENV=production
+      - "7001:7001"
 
   frontend:
-    image: soumyabrata024/tech-tracker-ui:latest # Frontend service image
-    container_name: tech-tracker-ui
+    image: soumyabrata024/tech-tracker-app:latest
+    container_name: tech-tracker-app
     ports:
-      - "3000:3000" # Expose frontend on port 3000
+      - "3000:3000"
     depends_on:
-      - backend # Wait for the backend service to start before frontend
+      - backend
 ```
 
 To start the containers in detached mode (in the background), run the following command:
