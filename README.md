@@ -1,8 +1,38 @@
 # Tech Tracker App
 
+![Tech Tracker Banner](public/tech-tracker-banner.png)
+
 ## Overview
 
 The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
+
+- **Live Link** :
+  https://tech-track-app-frontend.azurewebsites.net/tracker
+
+### Features
+
+- Track technologies used in a given year.
+- Input the number of lines of code written for each technology.
+- Visual representation using **Google Charts** to display the data.
+- RESTful API for backend interactions.
+- Integrated with GitHub API to fetch data related to technologies used in the year.
+
+## Tech Stack
+
+- **Frontend**:
+  - **React.js** for building the user interface.
+  - **Google Charts** for visualizing the data.
+- **Backend**:
+  - **Express.js** for building the REST API.
+  - **Node.js** as the runtime environment.
+  - **GitHub API** integration to fetch data related to technologies used in the year.
+
+## Overview
+
+The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
+
+- **Live Link** :
+  https://tech-track-app-frontend.azurewebsites.net/tracker
 
 ### Features
 
@@ -44,10 +74,21 @@ git clone https://github.com/scode24/Tech-Tracker-App.git
 cd tech-tracker
 ```
 
-To run backend service
+Go to backend folder
 
 ```bash
 cd backend
+```
+
+Create and add github access token in .env file
+
+```
+GITHUB_ACCESS_TOKEN = <your_github_access_token>
+```
+
+To run backend service
+
+```bash
 node app.js
 ```
 
