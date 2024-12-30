@@ -14,7 +14,7 @@ const GraphPlotter = (props) => {
 
   const transformData = (data) => {
     const transformedData = data.map((item) => [item.name, item.usage]);
-    const headers = ["Tech stack", "Lines of code"];
+    const headers = ["Tech stack", "Amount of Code (in Bytes)"];
     return [headers, ...transformedData];
   };
 
@@ -24,7 +24,7 @@ const GraphPlotter = (props) => {
         chartType={type}
         data={graphData}
         options={{
-          title: "Tech Stack vs Lines of Code",
+          title: "Tech Stack vs Amount of Code (in Bytes)",
           width: "100%",
           height: "100%",
         }}
