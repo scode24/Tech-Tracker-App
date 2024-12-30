@@ -147,7 +147,7 @@ services:
 To start the containers in detached mode (in the background), run the following command:
 
 ```bash
-docker-compose up -f docker-compose-file.yml -d
+docker-compose -f docker-compose-file.yml up -d
 ```
 
 ## Access Tech Tracker
