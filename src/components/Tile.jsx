@@ -14,7 +14,7 @@ const Tile = (props) => {
         </div>
       </div>
       <div className="flex flex-col mt-5 items-end">
-        <span className="text-xs">Lines Of Code</span>
+        <span className="text-xs">Codes (in Bytes)</span>
         <span className="text-2xl font-medium">{usage}</span>
       </div>
     </div>

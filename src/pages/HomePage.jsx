@@ -37,7 +37,7 @@ const HomePage = () => {
   const [searchParams] = useSearchParams();
   const username = searchParams.get("username");
   const { data, status } = useFetchUserDataHook(username);
-  const { yearTechData, setYearTechData } = useTechDataState();
+  const { setYearTechData } = useTechDataState();
   const [selectedYear, setSelectedYear] = useState();
   const [currentTheme, setCurrentTheme] = useState("light");
   const navigator = useNavigate();
@@ -154,8 +154,8 @@ const HomePage = () => {
                             Slide to select year
                           </span>
                           <span className="font-extralight">
-                            Track cumulative usages of different technologies
-                            over the years
+                            Track the cumulative usage (in Bytes) of different
+                            technologies over the years.
                           </span>
                         </div>
                       ),
@@ -343,8 +343,8 @@ const HomePage = () => {
                             Slide to select year
                           </span>
                           <span className="font-extralight">
-                            Track cumulative usages of different technologies
-                            over the years
+                            Track the cumulative usage (in Bytes) of different
+                            technologies over the years.
                           </span>
                         </div>
                       ),

@@ -4,7 +4,7 @@
 
 ## Overview
 
-The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **lines of code** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
+The **Tech Tracker App** allows users to track the technologies they have used throughout a specific year, along with the **amount of code (in Byte)** they have written for each technology. The app provides a visual representation of this data using **Google Charts** and allows interaction via a **React** frontend. The backend is built with **Express.js** and **Node.js** and integrates with the **GitHub API** to fetch relevant data.
 
 - **Live Link** :
   https://tech-tracker-app.azurewebsites.net/tracker
