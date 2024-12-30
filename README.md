@@ -1,6 +1,6 @@
 # Tech Tracker App
 
-![Tech Tracker Banner](public/tech-tracker-banner.png)
+![Tech Tracker Banner](public/tech-tracker-image.png)
 
 ## Overview
 
